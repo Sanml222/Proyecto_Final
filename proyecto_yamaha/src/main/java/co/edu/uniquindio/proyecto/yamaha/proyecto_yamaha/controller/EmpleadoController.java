@@ -1,38 +1,50 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.controller;
 
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.controller.interfaces.EmpleadoControllerInterface;
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Distribuidora;
+
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.factory.ModelFactory;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Empleado;
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.builder.EmpleadoBuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class EmpleadoController implements EmpleadoControllerInterface {
+public class EmpleadoController {
 
-    Distribuidora distribuidora = Distribuidora.getInstancia();
-    @Override
-    public Empleado crearEmpleado(String nombre, String cedula, String email, String celular, int edad, String tipo) {
+    private static ModelFactory modelFactory;
 
-        Empleado empleado = new Empleado(nombre, cedula, email, celular, edad, tipo);
-
-        distribuidora.agregarEmpleado(empleado);
-
-
-        return empleado;
+    public EmpleadoController(){
+        modelFactory = ModelFactory.getInstancia();
     }
 
-    @Override
-    public Empleado obtenerEmpleado(String cedula) {
-
-        return distribuidora.obtenerEmpleado(cedula);
+    public List<Empleado> obtenerEmpleados() {
+        return modelFactory.obtenerEmpleados();
     }
 
-    @Override
-    public boolean actualizarEmpleado(Empleado empleadoActualizado) {
-        return distribuidora.actualizarEmpleado(empleadoActualizado);
+    public boolean crearEmpleado(Empleado empleado) {
+        return modelFactory.crearEmpleado(empleado);
     }
 
-    @Override
-    public boolean eliminarEmpleado(String cedula) {
-        return distribuidora.eliminarEmpleado(cedula);
+
+    public boolean actualizarEmpleado(Empleado empleadoSeleccionado, Empleado empleadoFormulario) {
+
+        EmpleadoBuilder empleadoBuilder = new EmpleadoBuilder()
+                .nombre(empleadoSeleccionado.getNombre())
+                .cedula(empleadoSeleccionado.getCedula())
+                .email(empleadoSeleccionado.getEmail())
+                .celular(empleadoSeleccionado.getCelular())
+                .edad(empleadoSeleccionado.getEdad())
+                .tipo(empleadoSeleccionado.getTipoString());
+
+        Empleado empleadoActualizado = empleadoBuilder
+                .nombre(empleadoFormulario.getNombre())
+                .email(empleadoFormulario.getEmail())
+                .celular(empleadoFormulario.getCelular())
+                .edad(empleadoFormulario.getEdad())
+                .tipo(empleadoFormulario.getTipoString()).build();
+
+        return modelFactory.actualizarEmpleado(empleadoActualizado);
+    }
+
+    public boolean eliminarEmpleado(Empleado empleadoSeleccionado) {
+        return modelFactory.eliminarEmpleado(empleadoSeleccionado);
     }
 }

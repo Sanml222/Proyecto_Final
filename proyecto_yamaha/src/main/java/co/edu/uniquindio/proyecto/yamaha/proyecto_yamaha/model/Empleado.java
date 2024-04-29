@@ -1,10 +1,12 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model;
 
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.builder.EmpleadoBuilder;
+
 import java.util.ArrayList;
 
 public class Empleado extends Persona{
 
-    enum Roles {ADMIN,VENDEDOR};
+    enum Roles {ADMIN, VENDEDOR};
 
     private Roles tipo;
 
@@ -18,8 +20,13 @@ public class Empleado extends Persona{
         this.listaClientes = listaClientes;
     }
 
-    public Empleado(String nombre, String cedula, String email, String celular, int edad, String tipo) {
+    public Empleado(String nombre, String cedula, String email, String celular, int edad, String tipoString) {
         super(nombre, cedula, email, celular, edad);
+        this.tipo = obteneRol(tipoString);
+    }
+
+    public static EmpleadoBuilder builder(){
+        return new EmpleadoBuilder();
     }
 
     private Roles obteneRol(String tipo){
@@ -35,6 +42,10 @@ public class Empleado extends Persona{
         return tipo;
     }
 
+    public String getTipoString() {
+        return tipo.name();
+    }
+
     public void setTipo(Roles tipo) {
         this.tipo = tipo;
     }
@@ -42,5 +53,16 @@ public class Empleado extends Persona{
     public boolean agregarClienteLista(Cliente nuevoCliente){
 
         return listaClientes.add(nuevoCliente);
+    }
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "nombre='" + this.getNombre() + '\'' +
+                ", cedula='" + this.getCedula() + '\'' +
+                ", email='" + this.getEmail() + '\'' +
+                ", Celular='" + this.getCelular() + '\'' +
+                ", edad=" + this.getEdad() + '\'' +
+                ", tipo=" + this.getTipo() + '\'' +
+                '}';
     }
 }

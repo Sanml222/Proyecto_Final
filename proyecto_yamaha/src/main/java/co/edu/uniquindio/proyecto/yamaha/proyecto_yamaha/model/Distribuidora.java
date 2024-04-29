@@ -1,14 +1,17 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model;
 
+
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.interfaces.DistribuidoraModelInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Distribuidora implements DistribuidoraModelInterface {
 
 private static Distribuidora instancia;
     ArrayList<Cliente> listaClientesDistribuidora = new ArrayList<Cliente>();
-    ArrayList<Empleado> listaEmpleadosDistribuidora = new ArrayList<Empleado>();
+    List<Empleado> listaEmpleadosDistribuidora = new ArrayList<Empleado>();
+
 
     public Distribuidora(){}
 
@@ -19,6 +22,41 @@ private static Distribuidora instancia;
         return instancia;
     }
 
+    public boolean crearEmpleado(String nombre,
+                                String cedula,
+                                String email,
+                                String celular,
+                                int edad,String tipo){
+        Empleado empleadoEncontrado = obtenerEmpleado(cedula);
+        if(empleadoEncontrado == null){
+            Empleado empleado = getBuildEmpleado(nombre, cedula, email, celular, edad, tipo);
+            getListaEmpleadosDistribuidora().add(empleado);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+    public boolean crearEmpleado(Empleado nuevoEmpleado){
+        Empleado empleadoEncontrado = obtenerEmpleado(nuevoEmpleado.getCedula());
+        if(empleadoEncontrado == null){
+            getListaEmpleadosDistribuidora().add(nuevoEmpleado);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+    private Empleado getBuildEmpleado(String nombre, String cedula, String email, String celular, int edad, String tipo) {
+        return Empleado.builder()
+                .nombre(nombre)
+                .cedula(cedula)
+                .email(email)
+                .celular(celular)
+                .edad(edad)
+                .tipo(tipo)
+                .build();
+    }
+
+
     public ArrayList<Cliente> getListaClientesDistribuidora() {
         return listaClientesDistribuidora;
     }
@@ -27,7 +65,7 @@ private static Distribuidora instancia;
         this.listaClientesDistribuidora = listaClientesDistribuidora;
     }
 
-    public ArrayList<Empleado> getListaEmpleadosDistribuidora() {
+    public List<Empleado> getListaEmpleadosDistribuidora() {
         return listaEmpleadosDistribuidora;
     }
 
@@ -46,14 +84,15 @@ private static Distribuidora instancia;
     @Override
     public Empleado obtenerEmpleado(String cedula) {
 
-        for(Empleado empleado: listaEmpleadosDistribuidora){
-
-            if(cedula.equals(empleado.getCedula())){
-                return empleado;
+        Empleado empleado = null;
+        for (Empleado empleado1: getListaEmpleadosDistribuidora()) {
+            if(empleado1.getCedula().equalsIgnoreCase(cedula)){
+                empleado = empleado1;
+                break;
             }
         }
 
-        return null;
+        return empleado;
     }
 
     @Override

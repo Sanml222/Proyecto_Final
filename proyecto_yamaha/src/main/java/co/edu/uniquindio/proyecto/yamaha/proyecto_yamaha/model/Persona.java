@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model;
 
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.builder.PersonaBuilder;
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.builder.EmpleadoBuilder;
 
 public class Persona {
 
@@ -22,8 +22,8 @@ public class Persona {
         this.celular = celular;
         this.edad = edad;
     }
-    public static PersonaBuilder builder(){
-        return new PersonaBuilder();
+    public static EmpleadoBuilder builder(){
+        return new EmpleadoBuilder();
     }
 
     public String getNombre() {
