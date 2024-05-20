@@ -56,6 +56,38 @@ private static Distribuidora instancia;
                 .build();
     }
 
+    public boolean crearCliente(String nombre,
+                                 String cedula,
+                                 String email,
+                                 String celular,
+                                 int edad){
+        Cliente clienteEncontrado = obtenerCliente(cedula);
+        if(clienteEncontrado == null){
+            Cliente cliente = getBuildCliente(nombre, cedula, email, celular, edad);
+            getListaClientesDistribuidora().add(cliente);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+    public boolean crearCliente(Cliente nuevoCliente){
+        Cliente clienteEncontrado = obtenerCliente(nuevoCliente.getCedula());
+        if(clienteEncontrado == null){
+            getListaClientesDistribuidora().add(nuevoCliente);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+    private Cliente getBuildCliente(String nombre, String cedula, String email, String celular, int edad) {
+        return Cliente.builder()
+                .nombre(nombre)
+                .cedula(cedula)
+                .email(email)
+                .celular(celular)
+                .edad(edad).build();
+    }
+
 
     public ArrayList<Cliente> getListaClientesDistribuidora() {
         return listaClientesDistribuidora;
@@ -117,6 +149,56 @@ private static Distribuidora instancia;
             if(listaEmpleadosDistribuidora.get(i).getCedula().equals(cedula)){
 
                 listaEmpleadosDistribuidora.remove(i);
+
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public Cliente agregarCliente(Cliente nuevoCliente) {
+
+        listaClientesDistribuidora.add(nuevoCliente);
+
+        return nuevoCliente;
+    }
+
+    @Override
+    public Cliente obtenerCliente(String cedula) {
+
+        Cliente cliente = null;
+        for (Cliente cliente1: getListaClientesDistribuidora()) {
+            if(cliente1.getCedula().equalsIgnoreCase(cedula)){
+                cliente = cliente1;
+                break;
+            }
+        }
+
+        return cliente;
+    }
+
+    @Override
+    public boolean actualizarCliente(Cliente clienteActualizado) {
+
+        for (int i = 0; i < listaClientesDistribuidora.size(); i++){
+            if(listaClientesDistribuidora.get(i).getCedula().equals(clienteActualizado.getCedula())){
+
+                listaClientesDistribuidora.set(i, clienteActualizado);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean eliminarCliente(String cedula) {
+
+        for (int i = 0; i < listaClientesDistribuidora.size(); i++){
+            if(listaClientesDistribuidora.get(i).getCedula().equals(cedula)){
+
+                listaClientesDistribuidora.remove(i);
 
                 return true;
             }

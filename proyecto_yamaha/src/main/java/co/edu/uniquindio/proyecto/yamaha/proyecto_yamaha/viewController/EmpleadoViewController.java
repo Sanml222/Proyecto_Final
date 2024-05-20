@@ -136,6 +136,7 @@ public class EmpleadoViewController {
         return FXCollections.observableList(filteredList);
     }
     private boolean searchFindsOrder(Empleado empleado, String searchText){
+        System.out.print(searchText);
         return (empleado.getNombre().toLowerCase().contains(searchText))
                 || (empleado.getCedula().toLowerCase().contains(searchText))
                 || (searchText.contains(String.valueOf(empleado.getEdad())))

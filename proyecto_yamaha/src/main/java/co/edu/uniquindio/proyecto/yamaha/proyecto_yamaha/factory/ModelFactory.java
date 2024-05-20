@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.factory;
 
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Distribuidora;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Empleado;
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Cliente;
 
 
 import java.util.List;
@@ -103,5 +104,23 @@ public class ModelFactory  {
 
     public boolean eliminarEmpleado(Empleado empleadoSeleccionado) {
         return distribuidora.eliminarEmpleado(empleadoSeleccionado.getCedula());
+    }
+    public boolean crearCliente(Cliente cliente){
+        return distribuidora.crearCliente(cliente);
+    }
+
+
+    public List<Cliente> obtenerClientes() {
+        return distribuidora.getListaClientesDistribuidora();
+    }
+
+
+    public boolean actualizarCliente(Cliente clienteActualizado) {
+        return distribuidora.actualizarCliente(clienteActualizado);
+
+    }
+
+    public boolean eliminarCliente(Cliente clienteSeleccionado) {
+        return distribuidora.eliminarCliente(clienteSeleccionado.getCedula());
     }
 }
