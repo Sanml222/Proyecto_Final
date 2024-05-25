@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.factory;
 
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Distribuidora;
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Dto.UsuarioDto;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Empleado;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Cliente;
 
@@ -23,9 +24,9 @@ public class ModelFactory  {
         }
         return modelFactory;
     }
-
     private void inicializarDatos() {
         inicializarDatosEmpleado();
+        inicializarDatosCliente();
     }
     private void inicializarDatosEmpleado(){
 
@@ -80,6 +81,28 @@ public class ModelFactory  {
         distribuidora.getListaEmpleadosDistribuidora().add(empleado4);
         distribuidora.getListaEmpleadosDistribuidora().add(empleado5);
     }
+
+    private void inicializarDatosCliente(){
+
+        Cliente cliente1 = Cliente.builder()
+                .nombre("Sebastian")
+                .cedula("1090178904")
+                .email("sebasoml222@gmail.com")
+                .celular("3143334473")
+                .edad(21)
+                .build();
+
+        Cliente cliente2 = Cliente.builder()
+                .nombre("ana")
+                .cedula("2190237804")
+                .email("ana@gmail.com")
+                .celular("3257904893")
+                .edad(18)
+                .build();
+
+        distribuidora.getListaClientesDistribuidora().add(cliente1);
+        distribuidora.getListaClientesDistribuidora().add(cliente2);
+    }
     public boolean crearEmpleado(String nombre,
                                  String cedula,
                                  String email,
@@ -122,5 +145,17 @@ public class ModelFactory  {
 
     public boolean eliminarCliente(Cliente clienteSeleccionado) {
         return distribuidora.eliminarCliente(clienteSeleccionado.getCedula());
+    }
+
+    public Empleado autenticarUsuario(UsuarioDto usuarioDto)
+    {
+        Empleado empleadoAutenticado = distribuidora.obtenerEmpleado(usuarioDto.usuario());
+        if ((empleadoAutenticado == null)){
+            return null;
+        }
+        if (empleadoAutenticado.getCedula().equals(usuarioDto.contrasena())){
+            return empleadoAutenticado;
+        }
+        return null;
     }
 }

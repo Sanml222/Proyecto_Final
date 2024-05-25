@@ -1,5 +1,5 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.viewController;
-
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.memento.ClienteMemento;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.controller.ClienteController;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Cliente;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,6 +25,8 @@ public class ClienteViewController {
 
     Cliente clienteSeleccionado;
 
+    ClienteMemento clienteMemento;
+
     @FXML
     private ResourceBundle resources;
 
@@ -42,6 +44,9 @@ public class ClienteViewController {
 
     @FXML
     private Button btnLimpiarCliente;
+
+    @FXML
+    private Button btnRestaurarCliente;
 
     @FXML
     private TextField clienteCedula;
@@ -137,6 +142,7 @@ public class ClienteViewController {
             Cliente cliente = construirDatosClientes();
             if(clienteControllerService.crearCliente(cliente)){
                 listaClientes.add(cliente);
+                clienteMemento = cliente.guardarMemento();
                 mostrarMensaje("Notificación Cliente", "Cliente creado", "El cliente se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposCliente();
             }else{
@@ -190,6 +196,7 @@ public class ClienteViewController {
     private void listenerSelection() {
         tablaClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             clienteSeleccionado = newSelection;
+            clienteMemento = clienteSeleccionado.guardarMemento();
             mostrarInformacionCliente(clienteSeleccionado);
         });
 
@@ -272,6 +279,16 @@ public class ClienteViewController {
     @FXML
     void onLimpiarCliente(ActionEvent event) {
         limpiarCamposCliente();
+
+    }
+
+    @FXML
+    void restaurarCliente(ActionEvent event) {
+        if (clienteMemento != null)
+        {
+            clienteSeleccionado.restaurarDesdeMemento(clienteMemento);
+            mostrarInformacionCliente(clienteSeleccionado);
+        }
 
     }
 
