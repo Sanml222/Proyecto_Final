@@ -22,13 +22,9 @@ public class HelloApplication extends Application {
     }
     public void mostrarVentanaPrincipal() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("aplicacion-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
             AnchorPane rootLayout = (AnchorPane) fxmlLoader.load();
-            AplicacionView bancoViewController = fxmlLoader.getController();
-//            bancoViewController.setAplicacion(this);
-            // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
-            //scene.getStylesheets().add(getClass().getResource("estilos.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
