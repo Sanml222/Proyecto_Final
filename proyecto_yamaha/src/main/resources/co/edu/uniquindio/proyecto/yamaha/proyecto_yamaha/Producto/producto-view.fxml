@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.viewController.ProductoViewController">
+    <children>
+        <SplitPane dividerPositions="0.43190661478599224" orientation="VERTICAL" prefHeight="773.0" prefWidth="1000.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="998.0">
+                    <children>
+                        <Label layoutX="99.0" layoutY="72.0" prefHeight="17.0" prefWidth="61.0" text="Nombre">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="101.0" layoutY="179.0" prefHeight="17.0" prefWidth="57.0" text="Precio">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="100.0" layoutY="128.0" prefHeight="17.0" prefWidth="59.0" text="Cantidad">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="483.0" layoutY="71.0" prefHeight="17.0" prefWidth="62.0" text="Cilindraje">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="prodNombre" layoutX="170.0" layoutY="68.0" prefHeight="25.0" prefWidth="221.0" />
+                        <TextField fx:id="prodCantidad" layoutX="170.0" layoutY="124.0" prefHeight="25.0" prefWidth="221.0" />
+                        <RadioButton fx:id="radioMoto" layoutX="438.0" layoutY="16.0" mnemonicParsing="false" onAction="#onHabilitarCamposMoto" text="Moto">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tipoProducto" />
+                     </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioRepuesto" layoutX="514.0" layoutY="16.0" mnemonicParsing="false" onAction="#onHabilitarCamposRepuesto" text="Repuesto" toggleGroup="$tipoProducto">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </RadioButton>
+                        <Label layoutX="314.0" layoutY="16.0" prefHeight="20.0" prefWidth="109.0" text="Tipo de producto">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Separator layoutX="-1.0" layoutY="53.0" prefHeight="0.0" prefWidth="1010.0" />
+                        <TextField fx:id="prodPrecio" layoutX="170.0" layoutY="175.0" prefHeight="25.0" prefWidth="221.0" />
+                        <TextField fx:id="prodCilindraje" layoutX="564.0" layoutY="68.0" prefHeight="25.0" prefWidth="191.0" />
+                        <Label layoutX="476.0" layoutY="127.0" text="Tipo de moto">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="480.0" layoutY="178.0" prefHeight="20.0" prefWidth="77.0" text="Descripcion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="prodDescripcion" layoutX="564.0" layoutY="175.0" prefHeight="60.0" prefWidth="310.0" />
+                        <Button fx:id="btnCrearProducto" layoutX="430.0" layoutY="257.0" mnemonicParsing="false" onAction="#onCrearProducto" prefHeight="43.0" prefWidth="115.0" text="Guardar">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnLimpiarProducto" layoutX="281.0" layoutY="257.0" mnemonicParsing="false" onAction="#onLimpiarProducto" prefHeight="43.0" prefWidth="115.0" text="Nuevo">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnActualizarProducto" layoutX="571.0" layoutY="257.0" mnemonicParsing="false" onAction="#onActualizarProducto" prefHeight="43.0" prefWidth="115.0" text="Actualizar">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                  <ComboBox fx:id="TipoMoto" layoutX="564.0" layoutY="126.0" prefHeight="25.0" prefWidth="191.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="998.0">
+               <children>
+                  <TableView fx:id="tablaProductos" layoutX="4.0" layoutY="37.0" prefHeight="342.0" prefWidth="990.0">
+                    <columns>
+                      <TableColumn fx:id="tcTipo" prefWidth="87.0" text="Tipo" />
+                      <TableColumn fx:id="tcNombre" prefWidth="135.0" text="Nombre" />
+                        <TableColumn fx:id="tcDescripcion" prefWidth="387.0" text="Descripcion" />
+                        <TableColumn fx:id="tcCilindraje" prefWidth="69.0" text="Cilindraje" />
+                        <TableColumn fx:id="tcTipoMoto" prefWidth="128.0" text="Tipo Moto" />
+                        <TableColumn fx:id="tcCantidad" prefWidth="63.0" text="Camtidad" />
+                        <TableColumn fx:id="tcPrecio" prefWidth="120.0" text="Precio" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btnEliminarProducto" layoutX="442.0" layoutY="385.0" mnemonicParsing="false" onAction="#onEliminarProducto" prefHeight="43.0" prefWidth="115.0" text="Eliminar">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="14.0" layoutY="4.0" prefHeight="20.0" prefWidth="133.0" text="Busqueda por filtro">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtSearch" layoutX="147.0" layoutY="2.0" prefHeight="25.0" prefWidth="181.0" />
+               </children></AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

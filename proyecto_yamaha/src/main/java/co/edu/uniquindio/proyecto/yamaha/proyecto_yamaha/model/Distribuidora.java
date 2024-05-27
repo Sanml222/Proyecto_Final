@@ -11,6 +11,7 @@ public class Distribuidora implements DistribuidoraModelInterface {
 private static Distribuidora instancia;
     ArrayList<Cliente> listaClientesDistribuidora = new ArrayList<Cliente>();
     List<Empleado> listaEmpleadosDistribuidora = new ArrayList<Empleado>();
+    List<Producto> listaProductosDistribuidora = new ArrayList<Producto>();
 
 
     public Distribuidora(){}
@@ -199,6 +200,68 @@ private static Distribuidora instancia;
             if(listaClientesDistribuidora.get(i).getCedula().equals(cedula)){
 
                 listaClientesDistribuidora.remove(i);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<String> listaTipoMotos() {
+        List<Moto.TipoMoto> listaTipoMotos = List.of(Moto.TipoMoto.values());
+        List<String> listaTipoMotoString = new ArrayList<>();
+
+        for(Moto.TipoMoto tipo: listaTipoMotos)
+        {
+            listaTipoMotoString.add(tipo.name());
+        }
+        return listaTipoMotoString;
+    }
+    public List<Producto> getListaProductosDistribuidora() {
+        return listaProductosDistribuidora;
+    }
+    public boolean crearProducto(Producto producto) {
+        Producto productoEncontrado = obtenerProducto(producto.getNombre());
+        if(productoEncontrado == null){
+            getListaProductosDistribuidora().add(producto);
+            return true;
+        }else{
+            return  false;
+        }
+
+    }
+
+    private Producto obtenerProducto(String nombre) {
+        Producto producto = null;
+        for (Producto producto1: getListaProductosDistribuidora()) {
+            if(producto1.getNombre().equalsIgnoreCase(nombre)){
+                producto = producto1;
+                break;
+            }
+        }
+
+        return producto;
+    }
+
+    public boolean actualizarProducto(Producto productoActualizado) {
+
+        for (int i = 0; i < listaProductosDistribuidora.size(); i++){
+            if(listaProductosDistribuidora.get(i).getNombre().equals(productoActualizado.getNombre())){
+
+                listaProductosDistribuidora.set(i, productoActualizado);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarProducto(String nombre) {
+
+        for (int i = 0; i < listaProductosDistribuidora.size(); i++){
+            if(listaProductosDistribuidora.get(i).getNombre().equals(nombre)){
+
+                listaProductosDistribuidora.remove(i);
 
                 return true;
             }

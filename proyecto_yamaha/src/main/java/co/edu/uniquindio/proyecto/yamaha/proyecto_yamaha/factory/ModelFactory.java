@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.factory;
 
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Distribuidora;
+import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.*;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Dto.UsuarioDto;
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Empleado;
-import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Cliente;
 
 
 import java.util.List;
@@ -27,6 +25,7 @@ public class ModelFactory  {
     private void inicializarDatos() {
         inicializarDatosEmpleado();
         inicializarDatosCliente();
+        inicializarProductos();
     }
     private void inicializarDatosEmpleado(){
 
@@ -103,6 +102,21 @@ public class ModelFactory  {
         distribuidora.getListaClientesDistribuidora().add(cliente1);
         distribuidora.getListaClientesDistribuidora().add(cliente2);
     }
+
+    private void inicializarProductos()
+    {
+        Moto moto1 = new Moto("MT09", 36000000, 3, "Moto MT09 890 cc ", "DEPORTIVAS", "890 cc");
+        Moto moto2 = new Moto("N MAX", 1600000, 5, "Moto N MAX 155 cc ", "AUTOMATICA", "155 cc");
+
+        Repuesto repuesto1 = new Repuesto("Exosto MT09", 100000, 20,  "Exosto MT09 nueva");
+
+        distribuidora.getListaProductosDistribuidora().add(moto1);
+        distribuidora.getListaProductosDistribuidora().add(moto2);
+        distribuidora.getListaProductosDistribuidora().add(repuesto1);
+
+    }
+
+
     public boolean crearEmpleado(String nombre,
                                  String cedula,
                                  String email,
@@ -157,5 +171,25 @@ public class ModelFactory  {
             return empleadoAutenticado;
         }
         return null;
+    }
+
+    public List<Producto> obtenerProductos() {
+        return distribuidora.getListaProductosDistribuidora();
+    }
+
+    public List<String> listaTipoMotos() {
+        return distribuidora.listaTipoMotos();
+    }
+
+    public boolean crearProducto(Producto producto) {
+        return  distribuidora.crearProducto(producto);
+    }
+
+    public boolean actualizarProducto(Producto productoActualizado) {
+        return distribuidora.actualizarProducto(productoActualizado);
+    }
+
+    public boolean eliminarProducto(Producto productoSeleccionado) {
+        return distribuidora.eliminarProducto(productoSeleccionado.getNombre());
     }
 }
