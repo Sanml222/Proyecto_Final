@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.*;
 import co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.model.Dto.UsuarioDto;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ModelFactory  {
@@ -26,7 +27,43 @@ public class ModelFactory  {
         inicializarDatosEmpleado();
         inicializarDatosCliente();
         inicializarProductos();
+        inializarVentas();
     }
+
+    private void inializarVentas() {
+
+        Empleado empleado1 = Empleado.builder()
+                .nombre("Santiago")
+                .cedula("1090274004")
+                .email("santiagoml222@gmail.com")
+                .celular("3147904473")
+                .edad(18)
+                .tipo("ADMIN")
+                .build();
+
+        Cliente cliente1 = Cliente.builder()
+                .nombre("Sebastian")
+                .cedula("1090178904")
+                .email("sebasoml222@gmail.com")
+                .celular("3143334473")
+                .edad(21)
+                .build();
+
+        Cliente cliente2 = Cliente.builder()
+                .nombre("ana")
+                .cedula("2190237804")
+                .email("ana@gmail.com")
+                .celular("3257904893")
+                .edad(18)
+                .build();
+
+        Venta venta1 = new Venta(LocalDate.now(), empleado1, cliente1, "TARJETA");
+        Venta venta2 = new Venta(LocalDate.now(), empleado1, cliente2, "EFECTIVO");
+
+        distribuidora.getListaVentasDistribuidora().add(venta1);
+        distribuidora.getListaVentasDistribuidora().add(venta2);
+    }
+
     private void inicializarDatosEmpleado(){
 
         Empleado empleado1 = Empleado.builder()
@@ -191,5 +228,9 @@ public class ModelFactory  {
 
     public boolean eliminarProducto(Producto productoSeleccionado) {
         return distribuidora.eliminarProducto(productoSeleccionado.getNombre());
+    }
+
+    public List<Venta> obtenerVentas() {
+        return distribuidora.getListaVentasDistribuidora();
     }
 }

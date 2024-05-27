@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto.yamaha.proyecto_yamaha.viewController.VentasViewController">
+   <children>
+      <SplitPane dividerPositions="0.5" layoutY="-1.0" orientation="VERTICAL" prefHeight="769.0" prefWidth="1006.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <DatePicker fx:id="fechaVenta" layoutX="140.0" layoutY="48.0" prefHeight="25.0" prefWidth="263.0" />
+                  <Label layoutX="72.0" layoutY="49.0" text="Fecha">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="423.0" layoutY="181.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="423.0" layoutY="48.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="492.0" layoutY="49.0" text="Medio de pago">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="infoEmpleadoVenta" layoutX="141.0" layoutY="112.0" prefHeight="25.0" prefWidth="263.0" />
+                  <RadioButton fx:id="Efectivo" layoutX="629.0" layoutY="50.0" mnemonicParsing="false" text="Efectivo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="MedioDePago" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="Tarjeta" layoutX="744.0" layoutY="50.0" mnemonicParsing="false" text="Tarjeta" toggleGroup="$MedioDePago">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label layoutX="72.0" layoutY="114.0" text="Empleado">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="492.0" layoutY="114.0" text="Cliente">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="InfoClienteVenta" layoutX="548.0" layoutY="112.0" prefHeight="25.0" prefWidth="263.0" />
+                  <Button fx:id="btnAgregarDetalles" layoutX="252.0" layoutY="169.0" mnemonicParsing="false" onAction="#onAgregarDetalles" prefHeight="44.0" prefWidth="224.0" text="Agregar Detalles">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAgregarMantenimiento" layoutX="517.0" layoutY="169.0" mnemonicParsing="false" onAction="#onAgregarMantenimiento" prefHeight="44.0" prefWidth="224.0" text="Agregar Mantenimiento">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="321.0" layoutY="240.0" prefHeight="20.0" prefWidth="43.0" text="Total">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="totalVenta" layoutX="382.0" layoutY="241.0" prefHeight="25.0" prefWidth="263.0" />
+                  <Button fx:id="btnGuardarVenta" layoutX="429.0" layoutY="286.0" mnemonicParsing="false" onAction="#onGuardarVenta" prefHeight="57.0" prefWidth="146.0" text="Guardar">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnLimpearVenta" layoutX="252.0" layoutY="286.0" mnemonicParsing="false" onAction="#onLimpearVenta" prefHeight="57.0" prefWidth="146.0" text="Nuevo">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEliminarVenta" layoutX="598.0" layoutY="286.0" mnemonicParsing="false" onAction="#onEliminarVenta" prefHeight="57.0" prefWidth="146.0" text="Eliminar">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="769.0" prefWidth="1004.0">
+               <children>
+                  <TableView fx:id="tablaVenta" layoutX="12.0" layoutY="14.0" prefHeight="352.0" prefWidth="981.0">
+                    <columns>
+                      <TableColumn fx:id="tcFecha" prefWidth="235.0" text="Fecha" />
+                      <TableColumn fx:id="tcIdEmpleado" minWidth="3.0" prefWidth="232.0" text="ID Empleado" />
+                        <TableColumn fx:id="tcIdCliente" prefWidth="254.0" text="ID Cliente" />
+                        <TableColumn fx:id="tcTotal" prefWidth="259.0" text="Total" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

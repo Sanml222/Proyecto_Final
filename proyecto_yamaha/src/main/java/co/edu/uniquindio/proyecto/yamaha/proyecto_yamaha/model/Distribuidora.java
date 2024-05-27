@@ -13,6 +13,8 @@ private static Distribuidora instancia;
     List<Empleado> listaEmpleadosDistribuidora = new ArrayList<Empleado>();
     List<Producto> listaProductosDistribuidora = new ArrayList<Producto>();
 
+    List<Venta> listaVentasDistribuidora = new ArrayList<Venta>();
+
 
     public Distribuidora(){}
 
@@ -267,5 +269,9 @@ private static Distribuidora instancia;
             }
         }
         return false;
+    }
+
+    public List<Venta> getListaVentasDistribuidora() {
+        return listaVentasDistribuidora;
     }
 }
